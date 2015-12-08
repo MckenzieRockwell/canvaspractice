@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+  	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+  	<script src='
+https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js'></script>
+  	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+  	<script type='application/javascript'>
+  	function draw(){
+	  	var canvas = document.getElementById("canvas1");
+	  	if(canvas.getContext){
+	  		var ctx = canvas.getContext("2d");
+	  		console.log('whatever this is'); 
+
+	  		ctx.fillStyle = 'orange'; 
+
+	  		drawblob(ctx, 100, 100, 400, 200, 75, 50); 
+	  	}
+	 }
+
+	 function drawblob  (penn, trX, trY, width, height, xStraight, yStraight){
+	 		ctx = penn; 
+	 		penn.beginPath();
+	 		var xrun = (width-xStraight)/2; 
+	 		var yrun = (height-yStraight)/2; 
+ 
+
+	 		//Top left corner 
+	 		ctx.moveTo(trX, trY+yrun);
+	 		ctx.quadraticCurveTo(trX, trY,  trX+xrun, trY);
+	 		ctx.lineTo(trX+xStraight+xrun, trY);
+
+	 		//Top right corner 
+	 		ctx.quadraticCurveTo(trX+width, trY, trX+width, trY+yrun);
+	 		ctx.lineTo(trX+width, trY+yStraight+yrun);
+
+	 		//bottom right corner
+	 		ctx.quadraticCurveTo(trX+width, trY+height, trX+xStraight+xrun, trY+height);
+	 		ctx.lineTo(trX+xrun, trY+height); 
+
+	 		//bottom left corner
+	 		ctx.quadraticCurveTo(trX, trY+height, trX, trY+yrun+yStraight);
+	 		ctx.lineTo(trX, trY+yrun); 
+
+	 		ctx.fill();
+
+	 }
+
+  	</script>
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <body onload='draw();'>
+    <h1>html canvas practice</h1>
+    <div class="container">
+	    <div class='row'>
+			<div class='col-md-10 col-md-offset-2'>
+			    <canvas id='canvas1' height='600px' width='900px'></canvas>
+			</div>
+		</div>
+	</div>
   </body>
 </html>
